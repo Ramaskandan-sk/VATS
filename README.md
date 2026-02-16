@@ -266,9 +266,9 @@ GPU significantly improves transcription speed.
 ## 📁 Suggested Repository Structure
 
 ```
-ai-video-transcriber/
+VATS/
 │
-├── notebook.ipynb
+├── VATS.ipynb
 ├── README.md
 ├── requirements.txt
 └── sample_output.md
