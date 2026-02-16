@@ -4,15 +4,13 @@
 
 # 🎬 VATS
 
-<p align="center">
+
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
 ![Whisper](https://img.shields.io/badge/OpenAI-Whisper-green)
 ![Gemini](https://img.shields.io/badge/Google-Gemini-orange)
 ![Platform](https://img.shields.io/badge/Platform-Google%20Colab-yellow)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
-
-</p>
 
 An AI-powered video processing pipeline that:
 
@@ -289,26 +287,3 @@ ai-video-transcriber/
 
 ---
 
-## 📜 License
-
-MIT License
-
----
-
-## 👨‍💻 Author
-
-AI Video Intelligence Pipeline
-Built with Whisper + Gemini + FFmpeg
-
----
-
-If needed, I can also generate:
-
-* Production-ready Python package structure
-* Streamlit web app version
-* Flask API backend version
-* Dockerfile + deployment guide
-* Enterprise-grade documentation
-* CI/CD GitHub Actions workflow
-
-Specify the next target.
