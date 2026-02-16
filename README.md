@@ -1,54 +1,50 @@
-🎬VATS
+
+
+---
+
+# 🎬 VATS
+
 <p align="center">
 
-
-
-
-
-
-
-
-
+![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
+![Whisper](https://img.shields.io/badge/OpenAI-Whisper-green)
+![Gemini](https://img.shields.io/badge/Google-Gemini-orange)
+![Platform](https://img.shields.io/badge/Platform-Google%20Colab-yellow)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 </p>
 
 An AI-powered video processing pipeline that:
 
-Downloads YouTube videos
-
-Extracts audio using FFmpeg
-
-Transcribes speech using OpenAI Whisper
-
-Generates structured summaries using Google Gemini
-
-Exports results into a clean Markdown file
+* Downloads YouTube videos
+* Extracts audio using FFmpeg
+* Transcribes speech using OpenAI Whisper
+* Generates structured summaries using Google Gemini
+* Exports results into a clean Markdown file
 
 Designed for Google Colab with optional GPU acceleration.
 
-🚀 Features
+---
 
-YouTube video transcription
+## 🚀 Features
 
-Local video file upload support
+* YouTube video transcription
+* Local video file upload support
+* Automatic audio extraction (FFmpeg)
+* GPU support (CUDA detection)
+* Smart content classification:
 
-Automatic audio extraction (FFmpeg)
+  * Music/Lyrics detection (no summary generated)
+  * Meeting detection → Generates structured MoM
+  * Lecture/Vlog/Tutorial → Point-wise summary
+* Clean Markdown export (`output.md`)
+* Structured, readable AI formatting
 
-GPU support (CUDA detection)
+---
 
-Smart content classification:
+## 🧠 Architecture Overview
 
-Music/Lyrics detection (no summary generated)
-
-Meeting detection → Generates structured MoM
-
-Lecture/Vlog/Tutorial → Point-wise summary
-
-Clean Markdown export (output.md)
-
-Structured, readable AI formatting
-
-🧠 Architecture Overview
+```
 User Input (YouTube URL / Upload)
             │
             ▼
@@ -68,74 +64,89 @@ User Input (YouTube URL / Upload)
             │
             ▼
         output.md Export
+```
 
-🏗 Tech Stack
-Layer	Technology
-Language	Python
-Speech-to-Text	OpenAI Whisper
-LLM	Google Gemini
-Video Download	yt-dlp
-Audio Processing	FFmpeg
-Hardware	CUDA (optional)
-Platform	Google Colab
-📦 Installation (Google Colab)
-1️⃣ Install Dependencies
+---
+
+## 🏗 Tech Stack
+
+| Layer            | Technology      |
+| ---------------- | --------------- |
+| Language         | Python          |
+| Speech-to-Text   | OpenAI Whisper  |
+| LLM              | Google Gemini   |
+| Video Download   | yt-dlp          |
+| Audio Processing | FFmpeg          |
+| Hardware         | CUDA (optional) |
+| Platform         | Google Colab    |
+
+---
+
+## 📦 Installation (Google Colab)
+
+### 1️⃣ Install Dependencies
+
+```python
 !pip install -q -U yt-dlp openai-whisper ffmpeg-python google-generativeai
 !apt-get -y install ffmpeg
+```
 
-2️⃣ Configure Gemini API Key
+---
+
+### 2️⃣ Configure Gemini API Key
 
 In Google Colab:
 
-Open Settings → Secrets
+1. Open **Settings → Secrets**
+2. Add:
 
-Add:
-
+```
 Name: GEMINI_API_KEY
 Value: your_api_key_here
-
+```
 
 The script will stop if the key is missing.
 
-▶️ Usage
+---
+
+## ▶️ Usage
 
 When executed, the program prompts:
 
+```
 1 - Transcribe YouTube URL
 2 - Upload a video file
+```
 
-Option 1 – YouTube Mode
+---
 
-Enter video URL
+### Option 1 – YouTube Mode
 
-Duration validated (default: max 20 minutes)
+* Enter video URL
+* Duration validated (default: max 20 minutes)
+* Video downloaded
+* Audio extracted
+* Transcription generated
+* Optional AI summary
+* `output.md` generated
 
-Video downloaded
+---
 
-Audio extracted
+### Option 2 – Upload Mode
 
-Transcription generated
+* Upload local video
+* Convert to audio
+* Transcribe
+* Optional summary
+* `output.md` generated
 
-Optional AI summary
+---
 
-output.md generated
+## 🧾 Output Format
 
-Option 2 – Upload Mode
+Generated file: `output.md`
 
-Upload local video
-
-Convert to audio
-
-Transcribe
-
-Optional summary
-
-output.md generated
-
-🧾 Output Format
-
-Generated file: output.md
-
+```markdown
 # Transcript Output
 
 ## Transcript
@@ -147,127 +158,157 @@ Generated file: output.md
 (structured AI summary)
 
 ---
+```
 
-🧠 Intelligent Content Handling
-🎵 Music / Song Lyrics
+---
+
+## 🧠 Intelligent Content Handling
+
+### 🎵 Music / Song Lyrics
 
 If detected, system responds exactly:
 
+```
 This content appears to be music or song lyrics, so I will not summarize it.
+```
 
-🏢 Meetings
+---
 
-Generates structured Minutes of Meeting including:
+### 🏢 Meetings
 
-Agenda
+Generates structured **Minutes of Meeting** including:
 
-Key discussion points
+* Agenda
+* Key discussion points
+* Decisions taken
+* Action items
+* Responsible persons (if available)
 
-Decisions taken
+---
 
-Action items
-
-Responsible persons (if available)
-
-🎓 Other Content
+### 🎓 Other Content
 
 Produces:
 
-Structured point-wise summary
+* Structured point-wise summary
+* Bold important highlights
+* Clean formatting
+* No long transcript copying
 
-Bold important highlights
+---
 
-Clean formatting
+## ⚙️ Configuration
 
-No long transcript copying
+### Change Whisper Model
 
-⚙️ Configuration
-Change Whisper Model
+```python
 WHISPER_MODEL_NAME = "small"
-
+```
 
 Available options:
 
-tiny
+* tiny
+* base
+* small
+* medium
+* large
 
-base
+---
 
-small
+### Change Gemini Model
 
-medium
-
-large
-
-Change Gemini Model
+```python
 GEMINI_MODEL = "gemini-flash-latest"
+```
 
-Modify Duration Limit
+---
+
+### Modify Duration Limit
+
+```python
 process_youtube(url, max_minutes=20)
+```
 
-⚡ GPU Acceleration
+---
+
+## ⚡ GPU Acceleration
 
 The system automatically detects CUDA:
 
+```python
 device = "cuda" if torch.cuda.is_available() else "cpu"
-
+```
 
 GPU significantly improves transcription speed.
 
-🛑 Limitations
+---
 
-Max YouTube duration default: 20 minutes
+## 🛑 Limitations
 
-Transcript truncated to 9000 characters before Gemini processing
+* Max YouTube duration default: 20 minutes
+* Transcript truncated to 9000 characters before Gemini processing
+* Requires internet access
+* Large videos increase processing time
 
-Requires internet access
+---
 
-Large videos increase processing time
+## 🔮 Future Enhancements
 
-🔮 Future Enhancements
+* Timestamp-based transcript export
+* Speaker diarization
+* Multi-language auto detection
+* Chapter-wise summarization
+* PDF export
+* Web UI (Streamlit / Flask)
+* Docker support
+* REST API version
 
-Timestamp-based transcript export
+---
 
-Speaker diarization
+## 📁 Suggested Repository Structure
 
-Multi-language auto detection
-
-Chapter-wise summarization
-
-PDF export
-
-Web UI (Streamlit / Flask)
-
-Docker support
-
-REST API version
-
-📁 Suggested Repository Structure
+```
 ai-video-transcriber/
 │
 ├── notebook.ipynb
 ├── README.md
 ├── requirements.txt
 └── sample_output.md
+```
 
-🧪 Example Use Cases
+---
 
-Lecture summarization
+## 🧪 Example Use Cases
 
-Meeting documentation automation
+* Lecture summarization
+* Meeting documentation automation
+* Podcast summarization
+* YouTube content analysis
+* Educational content extraction
+* Research video breakdown
 
-Podcast summarization
+---
 
-YouTube content analysis
-
-Educational content extraction
-
-Research video breakdown
-
-📜 License
+## 📜 License
 
 MIT License
 
-👨‍💻 Author
+---
+
+## 👨‍💻 Author
 
 AI Video Intelligence Pipeline
 Built with Whisper + Gemini + FFmpeg
+
+---
+
+If needed, I can also generate:
+
+* Production-ready Python package structure
+* Streamlit web app version
+* Flask API backend version
+* Dockerfile + deployment guide
+* Enterprise-grade documentation
+* CI/CD GitHub Actions workflow
+
+Specify the next target.
